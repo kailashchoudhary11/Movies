@@ -5,7 +5,7 @@
 {% block main %}
     <h1 class="text-center">Title: {{ data.Title }}</h1>
     <img src="{{ data.Poster }}" alt="Poster" class="img-fluid rounded mx-auto d-block m-4">
-    <div class="details center-text">
+    <div class="details" style="font-size: 1.3rem;">
         <p>
             <b>
                 About movie:
@@ -14,14 +14,19 @@
         </p>
         <p>
             <b>
-                Likes:
-            </b>  {{ data.imdbVotes }}
+                Liked By:
+            </b>  
+            {% if data.imdbVotes == "N/A" %}
+                No
+            {% else %}
+                {{ data.imdbVotes }}
+            {% endif %}
         </p>
         <p>
             <b>
                 Release data:
             </b>
-            : {{ data.Released }}
+            {{ data.Released }}
         </p>
         <p>
             <b>
@@ -35,4 +40,10 @@
         <b>Genre</b> {{ data.Genre }}
 </p>
 </div>
+<script>
+    let home = document.querySelector("#home");
+    console.log(home);
+    home.classList.add("active");
+</script>
+
 {% endblock main %}

@@ -1,32 +1,44 @@
-{% extends 'moviedetails/base.html' %}   
-
+{% extends 'moviedetails/base.html' %}
 {% block title %}
-Saved Movies 
+    Saved Movies
 {% endblock title %}
-
 {% block main %}
-<style>
+    <style>
     img:hover {
         cursor: pointer;
     }
-</style>
-<h1>Saved Movies</h1>
-
-{% for data in movies %}
-<h3>Title: {{ data.Title }}</h3>
-<form action="{% url 'moviedetails:details' %}" method="post" class="godetail">
-    {% csrf_token %}
-    <img src="{{ data.Poster }}" alt="Movie Poster" onclick="form.submit()";>
-    <input type="hidden" name="q" value="{{ data.Title }}">
-</form>
-<p>
-    {{ data.imdbVotes }} Likes
-</p>
-<p>
-    Release data: {{ data.Released }}
-</p>
-<p>Genre: {{ data.Genre }}</p>
-<hr>
+    </style>
+    <h1>Saved Movies</h1>
+    {% for data in movies %}
+        <h3>Title: {{ data.Title }}</h3>
+        <form action="{% url 'moviedetails:details' %}"
+              method="post"
+              class="godetail">
+            {% csrf_token %}
+            <img src="{{ data.Poster }}"
+                 alt="Movie Poster"
+                 onclick="form.submit()"
+                 class="my-4">
+            <input type="hidden" name="q" value="{{ data.Title }}">
+        </form>
+        <p>
+            {% if data.imdbVotes == "N/A" %}
+                No
+            {% else %}
+                {{ data.imdbVotes }}
+            {% endif %}
+            <b> Likes </b>
+        </p>
+        <p>
+            <b>
+                Release data:
+            </b>
+            {{ data.Released }}
+        </p>
+        <p>
+            <b>Genre: </b> {{ data.Genre }}
+    </p>
+    <hr>
 {% endfor %}
 <script>
     var forms = document.querySelectorAll(".godetail");
@@ -38,5 +50,9 @@ Saved Movies
             console.log("he")
             forms[i].submit();})
     }
+        let saved = document.querySelector("#saved");
+        console.log(saved);
+        saved.classList.add("active");
+    
 </script>
 {% endblock main %}
