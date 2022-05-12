@@ -1,0 +1,28 @@
+{% extends 'moviedetails/base.html' %}   
+
+{% block title %}
+Movie Details
+{% endblock title %}
+
+{% block main %}
+
+
+<h1>Title: {{ data.Title }}</h1>
+    <img src="{{ data.Poster }}" alt="">
+    <p>
+        About movie:
+    {{ data.Plot }}
+</p>
+<p>
+    Likes: {{ data.imdbVotes }}
+</p>
+<p>
+    Release data: {{ data.Released }}
+</p>
+<p>
+    Cast: {{ data.Actors }}
+</p>
+<p>Language: {{ data.Language }}</p>
+<p>Genre: {{ data.Genre }}</p>
+
+{% endblock main %}

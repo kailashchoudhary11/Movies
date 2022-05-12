@@ -1,0 +1,12 @@
+{% extends 'moviedetails/base.html' %}
+{% block title %}
+    Search Movie
+{% endblock title %}
+{% block main %}
+    <h1>Search Movies</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="text" name="q" placeholder="Movie Name" autofocus>
+        <input type="submit" value="Search">
+    </form>
+{% endblock main %}

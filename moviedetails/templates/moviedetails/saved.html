@@ -1,0 +1,42 @@
+{% extends 'moviedetails/base.html' %}   
+
+{% block title %}
+Saved Movies 
+{% endblock title %}
+
+{% block main %}
+<style>
+    img:hover {
+        cursor: pointer;
+    }
+</style>
+<h1>Saved Movies</h1>
+
+{% for data in movies %}
+<h3>Title: {{ data.Title }}</h3>
+<form action="{% url 'moviedetails:details' %}" method="post" class="godetail">
+    {% csrf_token %}
+    <img src="{{ data.Poster }}" alt="Movie Poster" onclick="form.submit()";>
+    <input type="hidden" name="q" value="{{ data.Title }}">
+</form>
+<p>
+    {{ data.imdbVotes }} Likes
+</p>
+<p>
+    Release data: {{ data.Released }}
+</p>
+<p>Genre: {{ data.Genre }}</p>
+<hr>
+{% endfor %}
+<script>
+    var forms = document.querySelectorAll(".godetail");
+    images = document.querySelectorAll("img")
+    console.log(forms);
+    console.log(images);
+    for (let i = 0; i < images.length; i++) {
+        images[i].addEventListener("click", function() {
+            console.log("he")
+            forms[i].submit();})
+    }
+</script>
+{% endblock main %}
